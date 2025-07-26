@@ -1,5 +1,6 @@
 import os
 import config as cfg
+from google.genai import types
 
 def get_file_content(working_directory, file_path):
     abs_working_dir = os.path.abspath(working_directory)
@@ -19,3 +20,19 @@ def get_file_content(working_directory, file_path):
         return f"Error reading file: {e}"
 
     return content[:cfg.MAX_CHARS]
+
+
+
+schema_get_file_content = types.FunctionDeclaration(
+    name="get_file_content",
+    description="Read file contents from the specified directory along with their sizes, constrained to the working directory.",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "directory": types.Schema(
+                type=types.Type.STRING,
+                description="The file to read from, relative to the working directory. If not provided, reads from the working directory itself.",
+            ),
+        },
+    ),
+)

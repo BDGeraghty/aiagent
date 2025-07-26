@@ -5,6 +5,7 @@ from pkg.calculator import Calculator
 from pkg.render import render
 
 
+
 def main():
     calculator = Calculator()
     if len(sys.argv) <= 1:
